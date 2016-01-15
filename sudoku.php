@@ -34,7 +34,7 @@ Output: 1 - For valid solution
 	if(count($sudokuArray)>9)
 	{
 		// Redirect to form page to retry user by doing changes in txt file
-		header("Location:sudokuForm.php?msg=more than 9 number in a column");
+		header("Location:sudokuForm.php?msg=Please enter only 9 numbers in row/column");
 		exit;
 	}
 	foreach($sudokuArray as $key=>$val)
@@ -43,7 +43,7 @@ Output: 1 - For valid solution
 		if(strlen($val)>9 || preg_match('/^[0]/', $val))
 		{
 		// Redirect to form page to retry user by doing changes in txt file
-	    header("Location:sudokuForm.php?msg=Please enter only 9 numbers and without zero");
+	    header("Location:sudokuForm.php?msg=Please enter only 9 numbers in row and without zero");
 		exit;
 		}
 	}
