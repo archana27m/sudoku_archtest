@@ -26,6 +26,7 @@ public function __construct()
 // Function to validate sudoku solution
 public function validate($sudokuArray)
 	{
+
 	  $sum = 45; // The sum of numbers 1 to 9 is 45
 	  
 	  // Iterating with each element row-column wise and getting rowSum and colSum for further processing

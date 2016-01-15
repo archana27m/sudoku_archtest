@@ -16,30 +16,47 @@ Output: 1 - For valid solution
 */
 
 	
-  // Including validateSudoku class file
+	// Including validateSudoku class file
 	include_once("validateSudoku.class.php");
+
+	// Get txt file name from post
+	$sFile = $_POST['solSudo'];
 	
-  // sudoku input array row-column 9X9 
-	$sudokuArray = array(
-		array(1,3,2,5,7,9,4,6,8),
-		array(4,9,8,2,6,1,3,7,5),
-		array(7,5,6,3,8,4,2,1,9),
-		array(6,4,3,1,5,8,7,9,2),
-		array(5,2,1,7,9,3,8,4,6),
-		array(9,8,7,4,2,6,5,3,1),
-		array(2,1,4,9,3,5,6,8,7),
-		array(3,6,5,8,1,7,9,2,4),
-		array(8,7,9,6,4,2,1,5,3)
-	);
-	
+	// Open the file
+	$fp = @fopen($sFile, 'r'); 
+
+	// Add each line to an array excluding new line character \n
+	if ($fp) {
+	   $sudokuArray = file($sFile, FILE_IGNORE_NEW_LINES);
+	}
+
+	// Check if size of array is greater than 9 
+	if(count($sudokuArray)>9)
+	{
+		// Redirect to form page to retry user by doing changes in txt file
+		header("Location:sudokuForm.php?msg=more than 9 number in a column");
+		exit;
+	}
+	foreach($sudokuArray as $key=>$val)
+	{
+	// Check if row contains more than 9 number or 0
+		if(strlen($val)>9 || preg_match('/^[0]/', $val))
+		{
+		// Redirect to form page to retry user by doing changes in txt file
+	    header("Location:sudokuForm.php?msg=Please enter only 9 numbers and without zero");
+		exit;
+		}
+	}
+
   // create an object of validateSudoku class
 	$validSudoku = new validateSudoku();
 	
   // Pass the input array of sudoku numbers for validation to validate method
 	$result = $validSudoku->validate($sudokuArray);
 	
-  // Printing the result returned from validate method 
-	echo "Result - ". $result;
+  // Redirecting to form with printing the result returned from validate method 
+	 header("Location:sudokuForm.php?msg=$result");
+	 exit;
 
 ?>
 	
