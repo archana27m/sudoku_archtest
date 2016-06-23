@@ -1,5 +1,5 @@
 {
-    "name": "testsudoku/sudoku",
+    "name": "testsudoku/sudoku_archtest",
     "description": "A short description of what your package does",
      "require": 
 		{
